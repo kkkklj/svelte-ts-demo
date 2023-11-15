@@ -9,6 +9,11 @@ type TypeQueueHash = string;
 const pendingReqs:TypeQueueHash[] = [];
 const waittingReqs: TypeResolve[] = [];
 export function useQueue(axiosRequest:any,config:any,...arg:any) {
+  if(typeof config === 'string') {
+    config = {
+      url:config
+    }
+  }
   const queueHash = new Date().getTime() + Math.random() + '';
   config.queueHash = queueHash;
   if(pendingReqs.length >= 5) {
